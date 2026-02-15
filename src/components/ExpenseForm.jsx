@@ -1,6 +1,6 @@
-import React, { use, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 
-const ExpenseForm = () => {
+const ExpenseForm = ({expenses,setExpenses,totalExpense,setTotalExpense}) => {
     const categories = [
         "Food",
         "Transport",
@@ -16,7 +16,7 @@ const ExpenseForm = () => {
         "Other"
     ];
 
-    const [expenses,setExpenses]=useState([])
+    
     const [title,setTitle]=useState('')
     const [amount,setAmount]=useState('')
     const [category,setCategory]=useState('')
@@ -30,12 +30,14 @@ const ExpenseForm = () => {
             category:category,
             date:date
         }
-        setExpenses[[...expenses,newExpense]]
+        setExpenses([...expenses,newExpense])
         setTitle('')
         setAmount('')
         setCategory('')
-        setDate('')   
+        setDate('') 
+
         }
+       
 
   return (
     <div className='bg-white w-1/2 px-4 py-3 m-2 rounded-lg'>
@@ -93,8 +95,9 @@ const ExpenseForm = () => {
         </div>
         <div className='flex items-center justify-center'>
             <button 
-             className='px-8 py-1 bg-green-600 rounded text-white cursor-pointer'
-             onClick={handleClick}>
+             className='px-8 py-1 bg-green-600 rounded text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-70'
+             onClick={handleClick}
+             disabled={!title || !amount || !category || !date}>
                 Add Expense</button>
         </div>
       </form>
