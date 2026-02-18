@@ -1,17 +1,18 @@
-import React from 'react'
-import { Trash } from 'lucide-react'
+import React, { useEffect } from 'react'
+import { LoaderCircle, Trash } from 'lucide-react'
 
 const ExpenseList = ({expenses,setExpenses}) => {
+  
   const handleDelete=(idx)=>{
         let copyExpense=[...expenses]
         copyExpense.splice(idx,1)
         setExpenses(copyExpense)
   }
   return (
-    <div className='bg-white ml-10 mr-10 rounded-lg overflow-y-auto max-h-72.5'>
+    <div className='bg-white ml-10 mr-10 rounded-lg'>
         <h3 className='mb-4 text-lg font-semibold ml-4 pt-2'>Expense List</h3>
-        <div className='overflow-x-auto'>
-            <table className='w-full table-fixed border-collapse'>
+        <div className='overflow-x-auto overflow-y-auto max-h-72.5'>
+            <table className='min-w-150 w-full table-fixed border-collapse'>
                 <thead className='bg-gray-100'>        
                     <tr className='border-b border-gray-300'>
                         <th className='px-4 py-2 text-left'>Title</th>

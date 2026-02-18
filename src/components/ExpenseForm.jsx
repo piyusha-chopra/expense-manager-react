@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from 'react'
 
-const ExpenseForm = ({expenses,setExpenses,totalExpense,setTotalExpense}) => {
+const ExpenseForm = ({expenses,setExpenses}) => {
     const categories = [
         "Food",
         "Transport",
@@ -16,12 +16,13 @@ const ExpenseForm = ({expenses,setExpenses,totalExpense,setTotalExpense}) => {
         "Other"
     ];
 
-    
     const [title,setTitle]=useState('')
     const [amount,setAmount]=useState('')
     const [category,setCategory]=useState('')
     const [date,setDate]=useState('')
-
+    
+    const [errorMsg,setErrorMsg]=useState('')
+  
     const handleClick=()=>{
         const newExpense={
             id:Date.now(),
@@ -30,17 +31,17 @@ const ExpenseForm = ({expenses,setExpenses,totalExpense,setTotalExpense}) => {
             category:category,
             date:date
         }
+      
         setExpenses([...expenses,newExpense])
         setTitle('')
         setAmount('')
         setCategory('')
         setDate('') 
-
+         
         }
-       
 
   return (
-    <div className='bg-white w-1/2 px-4 py-3 m-2 rounded-lg'>
+    <div className='bg-white sm:w-1/2 px-4 py-3 m-2 rounded-lg'>
       <form 
       className='flex flex-col gap-4'
       onSubmit={(e)=>{
@@ -59,7 +60,7 @@ const ExpenseForm = ({expenses,setExpenses,totalExpense,setTotalExpense}) => {
              }}/>
         </div> 
         <div className='grid grid-cols-[80px_1fr] gap-2 items-center '>
-            <label>Amount</label>
+            <label>Amount (INR)</label>
             <input 
               type='number'
               placeholder='Enter amount' 
@@ -87,17 +88,18 @@ const ExpenseForm = ({expenses,setExpenses,totalExpense,setTotalExpense}) => {
             <label>Date</label>
             <input 
               type='date'
-              className='w-full border border-gray-400 rounded px-2 py-1'
+              className='w-full min-w-0 border border-gray-400 rounded px-2 py-1'
               value={date}
               onChange={(e)=>{
                 setDate(e.target.value)
               }}/>
         </div>
+       
         <div className='flex items-center justify-center'>
             <button 
              className='px-8 py-1 bg-green-600 rounded text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-70'
              onClick={handleClick}
-             disabled={!title || !amount || !category || !date}>
+             disabled={!title || !amount || Number(amount<0) || !category || !date}>
                 Add Expense</button>
         </div>
       </form>
