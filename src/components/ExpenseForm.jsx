@@ -20,8 +20,6 @@ const ExpenseForm = ({expenses,setExpenses}) => {
     const [amount,setAmount]=useState('')
     const [category,setCategory]=useState('')
     const [date,setDate]=useState('')
-    
-    const [errorMsg,setErrorMsg]=useState('')
   
     const handleClick=()=>{
         const newExpense={
