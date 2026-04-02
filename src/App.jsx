@@ -7,9 +7,10 @@ import ExpenseList from './components/ExpenseList.jsx'
 
 const App = () => {
 
-  let storedExpenses=JSON.parse(localStorage.getItem("expenses"))
- 
-  const [expenses,setExpenses]=useState(storedExpenses)
+  const [expenses,setExpenses]=useState(()=>{
+    let storedExpenses=localStorage.getItem("expenses")
+    return storedExpenses ? JSON.parse(storedExpenses) : []
+  })
    
   useEffect(()=>{
      localStorage.setItem("expenses",JSON.stringify(expenses))
